@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devanand B - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2a2a72;
+            --secondary-color: #007bff;
+            --accent-color: #f4f4f4;
+            --gradient-1: linear-gradient(45deg, #2a2a72, #007bff);
+            --gradient-2: linear-gradient(45deg, #007bff, #00ff88);
+        }
+
+        body {
+            background: #f8f9fa;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--gradient-1);
+            background-size: 400% 400%;
+            animation: gradientAnim 15s ease infinite;
+        }
+
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        .navbar {
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .profile-pic-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .profile-pic {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.03);
+        }
+
+        .instagram-edit-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gradient-2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .instagram-edit-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        /* Certificates Section */
+        .certificates-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .certificate-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .certificate-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .certificate-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b00;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .verify-btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-content scroll-reveal">
+            <div class="about-text">
+                <h1>Devanand B</h1>
+                <h3>Computer Science Student @ VIT Chennai</h3>
+                <p style="margin-top: 1.5rem;">
+                    Passionate full-stack developer specializing in cloud computing and high-performance computing. 
+                    Focused on creating efficient, scalable solutions through innovative technology implementations.
+                </p>
+            </div>
+            <div class="profile-pic-container">
+                <img src="profile.jpg" alt="Devanand B" class="profile-pic">
+                <button class="instagram-edit-btn" onclick="openPhotoEditor()">
+                    <i class="fas fa-magic"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title scroll-reveal">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card scroll-reveal">
+                <h3><i class="fas fa-bolt"></i> Piezoelectric Generator</h3>
+                <p>Developed an electricity generation system converting mechanical pressure into electrical energy</p>
+                <div class="tech-stack">
+                    <span>Electronics</span>
+                    <span>Energy Harvesting</span>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <h3><i class="fas fa-book"></i> Library Management System</h3>
+                <p>Full-stack web application for managing library operations and inventory</p>
+                <div class="tech-stack">
+                    <span>HTML/CSS</span>
+                    <span>Python</span>
+                    <span>SQL</span>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <h3><i class="fas fa-robot"></i> A* Pathfinding Game</h3>
+                <p>Implemented optimal pathfinding algorithm for game AI using Python</p>
+                <div class="tech-stack">
+                    <span>Python</span>
+                    <span>AI/ML</span>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <h3><i class="fab fa-aws"></i> AWS Ride Booking</h3>
+                <p>Scalable ride-sharing platform using 6 AWS services</p>
+                <div class="tech-stack">
+                    <span>AWS EC2</span>
+                    <span>S3</span>
+                    <span>Lambda</span>
+                </div>
+            </div>
+
+            <div class="project-card scroll-reveal">
+                <h3><i class="fas fa-traffic-light"></i> HPC Traffic Optimization</h3>
+                <p>Supercomputer-powered traffic management system</p>
+                <div class="tech-stack">
+                    <span>Python</span>
+                    <span>HPC</span>
+                    <span>Data Analysis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title scroll-reveal">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category scroll-reveal">
+                <h3><i class="fas fa-palette"></i> Frontend</h3>
+                <ul style="margin-top: 1rem;">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                </ul>
+            </div>
+
+            <div class="skill-category scroll-reveal">
+                <h3><i class="fas fa-server"></i> Backend</h3>
+                <ul style="margin-top: 1rem;">
+                    <li>Python</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+
+            <div class="skill-category scroll-reveal">
+                <h3><i class="fas fa-cloud"></i> Cloud</h3>
+                <ul style="margin-top: 1rem;">
+                    <li>AWS</li>
+                    <li>Azure</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates">
+        <h2 class="section-title scroll-reveal">Certifications</h2>
+        <div class="certificates-container">
+            <div class="certificate-card scroll-reveal">
+                <span class="certificate-badge">Microsoft</span>
+                <img src="azure-certificate-preview.jpg" alt="Azure AI Fundamentals" class="certificate-img" onclick="openModal('azure-certificate-preview.jpg')">
+                <h3>Azure AI Fundamentals</h3>
+                <p>Issued: July 31, 2024</p>
+                <a href="Azure-AI-Fundamentals.pdf" download="Devanand-Azure-AI-Fundamentals.pdf" class="contact-btn">
+                    <i class="fas fa-download"></i> Download PDF
+                </a>
+                <a href="https://verify.certiport.com/?wCTDJ-48DB" target="_blank" class="verify-btn">
+                    Verify Certificate
+                </a>
+            </div>
+
+            <div class="certificate-card scroll-reveal">
+                <span class="certificate-badge">IBM</span>
+                <img src="web-dev-certificate-preview.jpg" alt="Web Development Fundamentals" class="certificate-img" onclick="openModal('web-dev-certificate-preview.jpg')">
+                <h3>Web Development Fundamentals</h3>
+                <p>Issued: March 03, 2025</p>
+                <a href="web-development.pdf" download="Devanand-IBM-Web-Development.pdf" class="contact-btn">
+                    <i class="fas fa-download"></i> Download PDF
+                </a>
+                <a href="https://www.credly.com/badges/51b967a2-7fde-4e13-add3-761be938676a" target="_blank" class="verify-btn">
+                    Verify Certificate
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title scroll-reveal">Let's Connect</h2>
+        <div class="contact-container">
+            <div class="contact-card scroll-reveal">
+                <h3><i class="fas fa-envelope"></i> Email</h3>
+                <p>dev24074@gmail.com</p>
+                <a href="mailto:dev24074@gmail.com" class="contact-btn">
+                    Send Message
+                </a>
+            </div>
+
+            <div class="contact-card scroll-reveal">
+                <h3><i class="fab fa-linkedin"></i> LinkedIn</h3>
+                <p>Connect with me</p>
+                <a href="https://linkedin.com/in/devanand-boopalan-711566279" 
+                   class="contact-btn" 
+                   target="_blank">
+                    Visit Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Scroll Reveal Animation
+        const scrollReveal = document.querySelectorAll('.scroll-reveal');
+        
+        const revealOnScroll = () => {
+            scrollReveal.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if(elementTop < windowHeight * 0.8) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Photo Editor Function
+        function openPhotoEditor() {
+            // In a real implementation, this would connect to an image editor API
+            alert("For Instagram DP editing: 1) Edit your photo using tools like Canva or Photoshop 2) Save as profile.jpg 3) Refresh this page");
+        }
+
+        // Certificate Modal Functions
+        function openModal(imageSrc) {
+            const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            document.getElementById('certificateModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('certificateModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
